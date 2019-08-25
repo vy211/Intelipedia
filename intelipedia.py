@@ -1,13 +1,14 @@
 from tkinter import *
+import os
 from tkinter import messagebox
 import wolframalpha
 import pyttsx3
 
 client = wolframalpha.Client('TV3KA5-7RRG64WVKQ')
 engine = pyttsx3.init()
+engine.setProperty('rate',150)
 root = Tk()
 root.geometry('800x200')
-
 root.title("Intelipedia by Vipin Yadav")
 label_1 = Label(root, text="Question:", width=20, font=("bold", 15))
 label_1.place(x=10, y=50)
@@ -18,6 +19,7 @@ entry_1.place(x=190, y=50)
 entry_1.focus_set()
 
 
+
 # entry_2 = Entry(root,bd=3,width=40,font=('bold',15))
 # entry_2.place(x=190,y=100)
 def txt():
@@ -26,8 +28,7 @@ def txt():
         output = next(res.results).text
         messagebox.showinfo("Answer:", output)
     except:
-        print("Answer not Getting!!!!!", end="")
-        print("Try Another Question!!")
+        messagebox.showinfo("Answer:", "Sorry!\nTry Another Question")
 
 
 def spe():
@@ -37,8 +38,8 @@ def spe():
         engine.say(output)
         engine.runAndWait()
     except:
-        print("Answer not Getting!!!!!", end="")
-        print("Try Another Question!!")
+        engine.say("Sorry, try another question answer not define!")
+        engine.runAndWait();
 
 
 def ts():
@@ -50,8 +51,10 @@ def ts():
         engine.runAndWait()
         messagebox.showinfo("Answer:", output)
     except:
-        print("Answer not Getting!!!!!", end="")
-        print("Try Another Question!!")
+        engine.say("Sorry, try another question answer not define!")
+        engine.runAndWait();
+        messagebox.showinfo("Answer:", "Sorry!\nTry another question!")
+
 
 
 Button(root, text='Text', width=20, bg='brown', fg='white', command=txt).place(x=50, y=150)

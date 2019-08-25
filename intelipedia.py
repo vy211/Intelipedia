@@ -1,4 +1,5 @@
 from tkinter import *
+import srecog
 import os
 from tkinter import messagebox
 import wolframalpha

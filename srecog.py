@@ -8,7 +8,7 @@ def rec():
     try:
         txt=r.recognize_google(audio)
         return txt
+
     except:
         pass
-a=rec()
-print(a)
+#rec()

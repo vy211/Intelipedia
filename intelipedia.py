@@ -4,20 +4,38 @@ import os
 from tkinter import messagebox
 import wolframalpha
 import pyttsx3
-
 client = wolframalpha.Client('TV3KA5-7RRG64WVKQ')
 engine = pyttsx3.init()
 engine.setProperty('rate',150)
 root = Tk()
 root.geometry('800x200')
 root.title("Intelipedia by Vipin Yadav")
+pho = PhotoImage(file = r"mic.png")
+photo=pho.subsample(8,9)
+
 label_1 = Label(root, text="Question:", width=20, font=("bold", 15))
 label_1.place(x=10, y=50)
 # label_2 = Label(root, text="Answer:",width=20,font=("bold", 15))
 # label_2.place(x=10,y=100)
-entry_1 = Entry(root, bd=3, width=40, font=('bold', 15))
+entry_1 = Entry(root, bd=3, width=30, font=('bold', 15))
 entry_1.place(x=190, y=50)
 entry_1.focus_set()
+def spec():
+    ent=srecog.rec()
+    try:
+        res = client.query(ent)
+        output = next(res.results).text
+        print(output)
+        engine.say(output)
+        engine.runAndWait()
+        messagebox.showinfo("Answer:", output)
+    except:
+        engine.say("Sorry, try another question answer not define!")
+        engine.runAndWait();
+        messagebox.showinfo("Answer:", "Sorry!\nTry another question!")
+
+
+Button(root, text = 'Click Me !',width=60, image = photo,command=spec).place(x=600,y=35)
 
 
 

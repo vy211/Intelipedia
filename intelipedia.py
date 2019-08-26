@@ -21,8 +21,11 @@ entry_1 = Entry(root, bd=3, width=30, font=('bold', 15))
 entry_1.place(x=190, y=50)
 entry_1.focus_set()
 def spec():
-    ent=srecog.rec()
+    entry_1.select_clear()
+    ent = srecog.rec()
+    entry_1.insert(0, ent)
     try:
+
         res = client.query(ent)
         output = next(res.results).text
         print(output)
@@ -30,17 +33,13 @@ def spec():
         engine.runAndWait()
         messagebox.showinfo("Answer:", output)
     except:
+
         engine.say("Sorry, try another question answer not define!")
         engine.runAndWait();
         messagebox.showinfo("Answer:", "Sorry!\nTry another question!")
 
 
 Button(root, text = 'Click Me !',width=60, image = photo,command=spec).place(x=600,y=35)
-
-
-
-# entry_2 = Entry(root,bd=3,width=40,font=('bold',15))
-# entry_2.place(x=190,y=100)
 def txt():
     try:
         res = client.query(entry_1.get())
